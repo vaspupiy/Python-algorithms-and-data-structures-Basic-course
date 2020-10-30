@@ -1,1 +1,1 @@
-print('Hello Python algorithms and data structures Basic course')
+print('Hello "Python algorithms and data structures Basic course"')
