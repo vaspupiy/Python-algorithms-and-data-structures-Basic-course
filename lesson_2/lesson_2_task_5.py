@@ -6,7 +6,7 @@
 def my_f_1(num, count_num):
     """Возвращает ввиде строки пары код-символ таблицы ASCII в количестве count_num начиная с num (шаг 1)  """
     out_str = ''
-    for i in range(count_num):
+    for _ in range(count_num):
         out_str += f'{num}-"{chr(num)}" '
         num += 1
     return out_str.rstrip()
@@ -14,7 +14,7 @@ def my_f_1(num, count_num):
 
 def my_f_2(num, count_num):
     """Выводит на экран в одну строку пары код-символ таблицы ASCII в количестве count_num начиная с num (шаг 1)  """
-    for i in range(count_num - 1):
+    for _ in range(count_num - 1):
         print(f'{num}-"{chr(num)}"', end=' ')
         num += 1
     print(f'{num}-"{chr(num)}"')
@@ -39,3 +39,15 @@ if __name__ == '__main__':
         my_f_2(start, step)
         start += step
     my_f_2(start, finish - start + 1)
+
+#  Решение здорового человека
+    print('\n Dean_vr')
+
+    START = 32
+    STOP = 127
+    STEP = 10
+
+    for i in range(START, STOP + 1):
+        print(f'\t{i}-"{chr(i)}"', end='')
+        if i % STEP == 1:
+            print()
