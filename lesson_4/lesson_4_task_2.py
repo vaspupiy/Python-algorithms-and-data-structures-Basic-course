@@ -12,7 +12,8 @@
 # У def eratosthenes(n_, magic_number=15) :
 #     1335    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
 # замена sieve_.append(sieve[i]) в цикле на sieve_ = [i for i in sieve if i != 0], после цикла
-# видимого прироста производительности не дает (на тесте timeit)
+# видимого прироста производительности не дает (на тесте timeit)... Избавился от  sieve_.append(sieve[i])
+
 
 
 from timeit import timeit
@@ -38,22 +39,26 @@ def eratosthenes(n_, magic_number=15):
     sieve = [i for i in range(n_ * magic_number)]
 
     sieve[1] = 0
-    sieve_ = []
+    # sieve_ = []
+    n_i = 0
     for i in range(2, n_ * magic_number):
         if sieve[i] != 0:
-            sieve_.append(sieve[i])
+            n_i += 1
+            if n_i == n_:
+                return sieve[i]
+            # sieve_.append(sieve[i])
             j = i + i
             while j < n_ * magic_number:
                 sieve[j] = 0
                 j += i
     # sieve_ = [i for i in sieve if i != 0]
-    if len(sieve_) >= n_:
-        return sieve_[n_ - 1]
+    # if len(sieve_) > n_:
+    #     return sieve_[n_ - 1]
     return f'Не срослось :(  - слишком большое n... поробуйте увеличить magic_number на 1'
 
 
 MAGIC_NUMBER = 11  # подкручивает исходный размер массива для Эратосфена относительно n
-N = 4
+N = 3
 print(prime_num_brut(N))
 print(eratosthenes(N, MAGIC_NUMBER))
 
@@ -75,11 +80,11 @@ print(f'{"_" * 30} {N=} {"_" * 30}')
 print(timeit('prime_num_brut(N)', number=100, globals=globals()))  # 4.1459559
 print(timeit('eratosthenes(N, MAGIC_NUMBER)', number=100, globals=globals()))  # 0.1587177000000004
 
-MAGIC_NUMBER = 11  # подкручивает исходный размер массива для Эратосфена относительно n
-N = 1000
-print(f'{"_" * 30} {N=} {"_" * 30}')
-print(timeit('prime_num_brut(N)', number=100, globals=globals()))  # 20.0159218
-print(timeit('eratosthenes(N, MAGIC_NUMBER)', number=100, globals=globals()))  # 0.3240426999999997
+# MAGIC_NUMBER = 11  # подкручивает исходный размер массива для Эратосфена относительно n
+# N = 1000
+# print(f'{"_" * 30} {N=} {"_" * 30}')
+# print(timeit('prime_num_brut(N)', number=100, globals=globals()))  # 20.0159218
+# print(timeit('eratosthenes(N, MAGIC_NUMBER)', number=100, globals=globals()))  # 0.3240426999999997
 
 MAGIC_NUMBER = 11  # подкручивает исходный размер массива для Эратосфена относительно n
 N = 1000
